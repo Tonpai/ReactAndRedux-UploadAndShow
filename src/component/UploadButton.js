@@ -33,6 +33,12 @@ class UploadButton extends Component{
     };
     reader.readAsDataURL(file);
 
+    // const file = target.files[0];
+    // this.props.dispatch({
+    //   type: 'UPLOAD_IMAGE',
+    //   image: file, 
+    // });
+
     // const reader = new FileReader()
     // const file = target.files[0];
     // reader.readAsDataURL(file);
