@@ -12,13 +12,37 @@ class UploadButton extends Component{
   }
 
   handleUpload({target}){
-    const file = target.files[0];
-    const fileBlob =window.URL.createObjectURL(file);
+    // const file = target.files[0];
+    // const fileBlob =window.URL.createObjectURL(file);
 
-    this.props.dispatch({
-      type: 'UPLOAD_IMAGE',
-      image: fileBlob, 
-    });
+    // console.log("UploadButton.js");
+    // console.log(file);
+
+    // this.props.dispatch({
+    //   type: 'UPLOAD_IMAGE',
+    //   image: fileBlob, 
+    // });
+
+    const reader = new FileReader();
+    const file = target.files[0];
+    reader.onloadend = () => {
+      this.props.dispatch({
+        type: 'UPLOAD_IMAGE',
+        image: reader.result, 
+      });
+    };
+    reader.readAsDataURL(file);
+
+    // const reader = new FileReader()
+    // const file = target.files[0];
+    // reader.readAsDataURL(file);
+    // reader.onload = evt =>
+    //   this.props.dispatch(
+    //     {
+    //       type: 'UPLOAD_IMAGE',
+    //       image: evt.target.result, 
+    //     }
+    // );
   }
 
   render(){
