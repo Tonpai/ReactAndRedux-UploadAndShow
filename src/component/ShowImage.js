@@ -12,6 +12,8 @@ class ShowImage extends Component {
       image : new window.Image(),
     };
 
+    this.image = new window.Image();
+
     this.imageNode = React.createRef();
     this.updateImage = this.updateImage.bind(this);
   }
@@ -34,8 +36,13 @@ class ShowImage extends Component {
     //     });
     // };
 
-    this.state.image.src = this.props.image;
-    this.state.image.onload = () => {
+    // this.state.image.src = this.props.image;
+    // this.state.image.onload = () => {
+    //   this.imageNode.getLayer().batchDraw();
+    //   console.log("updateImage");
+    // }
+    this.image.src = this.props.image;
+    this.image.onload = () => {
       this.imageNode.getLayer().batchDraw();
       console.log("updateImage");
     }
@@ -50,7 +57,7 @@ class ShowImage extends Component {
         color="black"
       >
         <Layer>
-         <Image image={ this.state.image } ref={ node => { this.imageNode = node }} />
+         <Image image={ this.image } ref={ node => { this.imageNode = node }} />
         </Layer>
       </Stage>
     );
