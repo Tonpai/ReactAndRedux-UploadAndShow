@@ -2,6 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 
 const initialState = {
   image: null,
+  isUpdate: true,
 };
 
 const reducer = (state=initialState, action) => {

@@ -9,8 +9,11 @@ class ShowImage extends Component {
     this.props = props;
 
     this.state = {
-      image : null,
+      image : new window.Image(),
     };
+
+    this.imageNode = React.createRef();
+    this.updateImage = this.updateImage.bind(this);
   }
 
   componentDidMount() {
@@ -22,14 +25,20 @@ class ShowImage extends Component {
   }
 
   updateImage() {
-    const image = new window.Image();
-    image.src = this.props.image;
-    this.props.image;
-    image.onload = () => {
-        this.setState({
-            image: image
-        });
-    };
+    // const image = new window.Image();
+    // image.src = this.props.image;
+    // this.props.image;
+    // image.onload = () => {
+    //     this.setState({
+    //         image: image
+    //     });
+    // };
+
+    this.state.image.src = this.props.image;
+    this.state.image.onload = () => {
+      this.imageNode.getLayer().batchDraw();
+      console.log("updateImage");
+    }
   }
   
 
@@ -41,7 +50,7 @@ class ShowImage extends Component {
         color="black"
       >
         <Layer>
-         <Image image={ this.state.image } />
+         <Image image={ this.state.image } ref={ node => { this.imageNode = node }} />
         </Layer>
       </Stage>
     );
@@ -50,6 +59,7 @@ class ShowImage extends Component {
 
 const mapStateToProps = ( state ) => ({
   image : state.image,
+  isUpdate : state.isUpdate,
 });
 
 export default connect(mapStateToProps)(ShowImage);
